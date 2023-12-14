@@ -1,0 +1,76 @@
+/* Styles generaux */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 20px;
+}
+
+/* Navbar personnalisee */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+/* Pied de page */
+footer {
+    margin-top: 30px;
+    padding: 20px 0;
+    background-color: #212529;
+    color: #fff;
+    text-align: center;
+}
+
+/* Styles de la page du menu */
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9em;
+}
+
+/* Styles de la page de revision du panier */
+.table {
+    margin-top: 20px;
+}
+
+/* Boutons d'action dans le panier */
+.btn-outline-secondary {
+    margin-right: 5px;
+}
+
+/* Styles de la page de suivi des commandes */
+.form-select {
+    width: auto;
+}
+.red{
+    color: red;
+}
+/* Boutons d'action dans le suivi des commandes */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+/* Reactivite */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 40vw;
+    }
+}
+
+.deco{
+    background-color: #212529;
+    color:grey;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-style: hidden;
+}

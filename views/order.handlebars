@@ -1,0 +1,31 @@
+<div class="container mt-5">
+        <h2>Votre Panier</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Article</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Quantite</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Retirer</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                {{#each order}}
+                <tr>
+                    <td>{{this.id_produit}}</td>
+                    <td>{{this.nom}}</td>
+                    <td>{{this.prix}}</td>
+                    <td>{{this.quantite}}</td>
+                    <td class="total" id="{{this.id_produit}}"></td>
+                    <td><button type="button" class="btn btn-sm btn-outline-secondary red" id="{{this.id_produit}}" {{#unless ../user}}disabled{{/unless}}>X</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-warning" id="vider" {{#unless user}}disabled{{/unless}}>Vider le panier</button>
+            <button type="button" class="btn btn-success" id="commander" {{#unless user}}disabled{{/unless}}>Commander</button>
+        </div>
+    </div>

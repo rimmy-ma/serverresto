@@ -1,0 +1,23 @@
+<div class="container mt-5">
+        <h2>Suivi des Commandes</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Détail commande</th>
+                    <th scope="col">État</th>
+                </tr>
+            </thead>
+            <tbody id="orders-list">
+                {{#each orders}}
+                <tr>
+                    <td>{{this.id_commande}}</td>
+                    <td>{{this.id_utilisateur}}</td>
+                    <td>{{this.panier_sauvegarde}}</td>
+                    <td><button type="button" class="btn btn-sm btn-outline-secondary" id="{{this.id_commande}}" {{#unless ../admin}}disabled{{/unless}}></button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>

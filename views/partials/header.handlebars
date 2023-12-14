@@ -1,0 +1,52 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Pizza and chill </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link {{#if pageAccueil}}active{{/if}}" {{#if pageAccueil}}aria-current="page"{{/if}} href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{#if pageMenu}}active{{/if}}" {{#if pageMenu}}aria-current="page"{{/if}} href="/menu">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{#if pageOrder}}active{{/if}}" {{#if pageOrder}}aria-current="page"{{/if}} href="/order">Panier</a>
+                    </li>
+                    {{#if user}}
+                    <li class="nav-item">
+                        <a class="nav-link {{#if pageOrders}}active{{/if}}" {{#if pageOrders}}aria-current="page"{{/if}} href="/ordersClient">Suivi mes Commandes</a>
+                    </li>
+                    {{/if}}
+                    {{#if admin}}
+                    <li class="nav-item">
+                        <a class="nav-link {{#if pageOrders}}active{{/if}}" {{#if pageOrders}}aria-current="page"{{/if}} href="/orders">Suivi des Commandes</a>
+                    </li>
+                    {{/if}}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    {{#unless user}}
+                    <li class="nav-item">
+                        <a class="nav-link {{#if pageConnexion}}active{{/if}}" {{#if pageConnexion}}aria-current="page"{{/if}} href="/connexion">Connexion</a>
+                    </li>
+                    {{/unless}}
+                    {{#if user}}
+                    <li class="nav-item">
+                        <a class="nav-link">{{user.nom}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/api/deconnexion" method="post" class="nav-link">
+                            <input type="submit" value="Déconnexion" class="deco">
+                        </form>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+</header>

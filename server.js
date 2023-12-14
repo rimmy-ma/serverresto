@@ -264,33 +264,27 @@ app.get('/api/beauPanier', async (request, response) => {
 
 app.post('/api/inscription', async (request, response, next) => {
     if(isCourrielValide(request.body.courriel) &&
-       isMotPasseValide(request.body.mot_de_passe)) {
-        console.log("Tentative d'insertion avec le courriel :", request.body.courriel);
-try {
-    await sequelize.transaction(async (t) => {
-        await addUtilisateur(
-            request.body.courriel,
-            request.body.mot_de_passe,
-            request.body.nom,
-            { transaction: t }
-        );
-    });
-    console.log("Utilisateur inséré avec succès");
-    response.status(201).end();
-} catch (error) {
-    console.error("Erreur lors de l'insertion :", error);
-    if (error.code === 'SQLITE_CONSTRAINT') {
-        response.status(409).end();
-    } else {
-        next(error);
-    }
-}
+    isMotPasseValide(request.body.mot_de_passe)) {
+        try {
+            await addUtilisateur(
+                request.body.courriel,
+                request.body.mot_de_passe
+            );
+        }
+        catch(erreur) {
+            if(erreur.code === 'SQLITE_CONSTRAINT'){
+                response.status(409).end();
+            }
+            else{
+                next(erreur)
+            }
+        }
     }
     else {
         response.status(400).end();
     }
-});
 
+});
 app.post('/api/connexion', (request, response, next) => {
     // On vérifie le le courriel et le mot de passe
     // envoyé sont valides
@@ -325,6 +319,32 @@ app.post('/api/connexion', (request, response, next) => {
     }
     else {
         response.status(400).end();
+    }
+});
+app.post('/ajouter-utilisateur', async (req, res) => {
+    const { courriel, mot_de_passe, nom } = req.body;
+    try {
+        const utilisateurExistant = await getUtilisateurParCourriel(courriel);
+        if (utilisateurExistant) {
+            return res.status(400).send('Un utilisateur avec ce courriel existe déjà');
+        }
+
+        await addUtilisateur(courriel, mot_de_passe, nom);
+        res.status(200).send('Utilisateur ajouté avec succès');
+    } catch (error) {
+        res.status(500).send('Erreur lors de l\'ajout de l\'utilisateur');
+    }
+});
+app.get('/utilisateur/:courriel', async (req, res) => {
+    try {
+        const utilisateur = await getUtilisateurParCourriel(req.params.courriel);
+        if (utilisateur) {
+            res.status(200).json(utilisateur);
+        } else {
+            res.status(404).send('Utilisateur non trouvé');
+        }
+    } catch (error) {
+        res.status(500).send('Erreur lors de la récupération de l\'utilisateur');
     }
 });
 
